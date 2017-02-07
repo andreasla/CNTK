@@ -38,6 +38,8 @@
 #include <map>
 #include <set>
 
+#define _DEFAULT_PACK_THRESHOLD_SIZE_IN_KB 32
+
 namespace Microsoft { namespace MSR { namespace CNTK {
 
 using namespace std;
@@ -2690,7 +2692,7 @@ SGDParams::SGDParams(const ConfigRecordType& configSGD, size_t sizeofElemType)
     m_maxSamplesInRAM = configSGD(L"maxSamplesInRAM", (size_t) SIZE_MAX);
     m_numSubminiBatches = configSGD(L"numSubminibatches", (size_t) 1);
 
-    m_packThresholdSize = configSGD(L"packThresholdSizeInKB", (size_t)32) * 1024;
+    m_packThresholdSizeInBytes = configSGD(L"packThresholdSizeInKB", (size_t)_DEFAULT_PACK_THRESHOLD_SIZE_IN_KB) * 1024;
 
     if (configAALR.Exists(L"numMiniBatch4LRSearch"))
     {
